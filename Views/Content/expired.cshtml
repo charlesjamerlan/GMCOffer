@@ -1,0 +1,12 @@
+﻿<div id="common-frame">
+    <div id="common-frame-copy" class="left">
+        <p class="title">Sorry!</p>
+        <p class="copy">It seems that everyone wants to try Green Mountain Coffee<sup>&reg;</sup>, and we've run out of samples. Please enjoy savings on our coffee with the coupons below.</p>
+        <div id="coupon-frame">
+            <a href="http://www.keurig.com/content/greenmountaincoffee?cm_mmc=ref-_-ccg-_-krg-_-gmccat​" target="_blank"><img src="@GMCOffer.Common.Utilities.GetImagePath()/gmc_coupon_1.png" id="coupon-1" border="0" /></a>
+        </div>
+    </div>
+    @Html.Partial("_Common")
+    <p class="copy clear">Return to <a href="@System.Configuration.ConfigurationManager.AppSettings["ReturnLinkURL"]" class="link" onclick="FireIBMCreateElementTag('OutboundLink:GMCWebsite', 'CCG_Form', 'CCG_Form', 'OutboundLink:GMCWebsite', 'Mobile:CCG_Form', 'Mobile:CCG_Form');">GreenMountainCoffee.com ></a></p>
+
+</div>

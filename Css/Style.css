@@ -1,0 +1,967 @@
+﻿
+/* Layouts */
+body {
+    width:100%;
+    padding:0;
+    margin:0;
+    font-family:Arial;
+}
+
+#wrapper
+{
+    background:url(/images/backdrop.jpg);
+    width:1200px;
+    height:4421px;
+    padding:150px 0 0 0;
+    margin:0 auto;
+}
+
+.radial
+{
+    /* IE10+ */ 
+    background-image: -ms-radial-gradient(center, ellipse farthest-corner, #FFFFFF 0%, #D9D9D9 50%, #707070 100%);
+
+    /* Mozilla Firefox */ 
+    background-image: -moz-radial-gradient(center, ellipse farthest-corner, #FFFFFF 0%, #D9D9D9 50%, #707070 100%);
+
+    /* Opera */ 
+    background-image: -o-radial-gradient(center, ellipse farthest-corner, #FFFFFF 0%, #D9D9D9 50%, #707070 100%);
+
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(radial, center center, 0, center center, 286, color-stop(0, #FFFFFF), color-stop(50, #D9D9D9), color-stop(100, #707070));
+
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-radial-gradient(center, ellipse farthest-corner, #FFFFFF 0%, #D9D9D9 50%, #707070 100%);
+
+    /* W3C Markup */ 
+    background-image: radial-gradient(ellipse farthest-corner at center, #FFFFFF 0%, #D9D9D9 50%, #707070 100%);
+}
+
+#main
+{
+    margin:0 auto;
+    width: 960px;
+    min-height:260px;
+    background:#FFF;
+    box-sizing: border-box;
+}
+
+#background-header
+{
+    background:url('/Images/gmc_backgroundheader.jpg');
+    width:100%;
+    height:262px;
+}
+
+#footer
+{
+    padding:40px 115px;
+    color:#5c5c5c;
+}
+
+#coupon-frame
+{
+    width:100%;
+    clear:both;
+    padding:0 35px 0 35px;
+    margin:20px 0 20px 0;
+}
+
+#coupon-1
+{
+    margin:0 31px 0 0;
+}
+
+#common-frame
+{
+    width:800px;
+    margin:0 auto;
+    margin-top:-80px;
+    overflow:hidden;
+}
+
+#common-frame-copy
+{
+    width:420px;
+    background:#FFF;
+}
+
+#common-frame-products
+{
+    width:380px;
+    position:relative;
+    top:0;
+    left:0;
+    height:340px;
+}
+
+#product-1
+{
+    margin:5px 0 0 0;
+}
+
+#product-2
+{
+    position:absolute;
+    top:30px;
+    right:28px;
+}
+
+#offer-frame
+{
+    padding:10px 35px 0 35px;
+    overflow:hidden;
+    width:100%;
+}
+
+#offer-form
+{
+    padding:10px 35px 20px 35px;
+    overflow:hidden;
+    width:100%;
+}
+
+#offer-form-questionaire
+{
+    overflow:hidden;
+    width:100%;
+    background:url('/Images/gmc_green_bg.jpg');
+    height:940px;
+    padding:0px 35px 20px 35px;
+    box-sizing: border-box;
+}
+
+#offer-form-questionaire-content
+{
+    padding:30px 0px 20px 80px;
+    overflow:hidden;
+    width:100%;
+}
+
+
+#submit-frame
+{
+    width:800px;
+    margin:0 auto;
+    overflow:hidden;
+    padding:40px 125px 0px 125px;
+}
+
+#state
+{
+    width:90%;
+}
+
+#zip
+{
+    width:90%;
+}
+
+.align-center
+{
+    text-align:center;
+}
+
+.left
+{
+    float:left;
+}
+
+.right
+{
+    float:right;
+}
+
+.clear
+{
+    clear:both;
+}
+
+.error-bg
+{
+    background-color:#fdf0f1!important;
+}
+
+select {
+  -webkit-border-radius: 0px;
+    outline: none;    
+}
+
+input[type=number] {   
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;    
+   -webkit-border-radius: 0px;
+}
+input[type=text] {   
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;    
+   -webkit-border-radius: 0px;
+}
+
+input[type=submit] {   
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;    
+    -webkit-border-radius: 0px;
+}
+
+input[type=button] {   
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;    
+    -webkit-border-radius: 0px;
+}
+
+.button
+{
+    outline:none;
+    cursor:pointer;
+    background:#a85a28;
+    color:#FFF;
+    font-family:'brandon_grotesquemedium', Arial;
+    border:0;
+    padding:8px 14px;
+    text-transform:uppercase;
+    font-size:16px;
+    background-image:url(/Images/gmc_arrow.png);
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: right center;  /* equivalent to 'top left' */
+}
+
+.button-alt
+{
+    outline:none;
+    cursor:pointer;
+    background:#FFF;
+    color:#4d7853;
+    font-family:'brandon_grotesquemedium', Arial;
+    border:0;
+    padding:8px 14px;
+    text-transform:uppercase;
+    font-size:16px;
+}
+
+.button-close
+{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    outline:none;
+    cursor:pointer;
+    color:#FFF;
+    font-family:'brandon_grotesquemedium', Arial;
+    border:0;
+    padding:20px 20px;
+    text-transform:uppercase;
+    font-size:17px;
+}
+
+sup { 
+    vertical-align: top; 
+    font-size: 0.6em; 
+}
+
+.offer
+{
+    width:46%;
+    float:left;
+    margin:0 25px 30px 0;
+}
+
+.variant
+{
+    float:left;
+    background:#FFF;
+    border-radius:50%;
+    height:17px;
+    width:17px;
+    margin:8px 10px 0 0;
+    display:inline-block;
+    vertical-align: baseline;
+    border:1px solid #777;
+}
+
+.element
+{
+    width:46%;
+    float:left;
+    margin:0 15px 15px 0;
+}
+
+
+/* Typeography */
+
+
+@font-face {
+    font-family: 'brandon_grotesquebold_italic';
+    src: url('/Fonts/brandon_bld_it-webfont.eot');
+    src: url('/Fonts/brandon_bld_it-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_bld_it-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_bld_it-webfont.woff') format('woff'),
+         url('/Fonts/brandon_bld_it-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_bld_it-webfont.svg#brandon_grotesquebold_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'brandon_grotesquebold';
+    src: url('/Fonts/brandon_bld-webfont.eot');
+    src: url('/Fonts/brandon_bld-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_bld-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_bld-webfont.woff') format('woff'),
+         url('/Fonts/brandon_bld-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_bld-webfont.svg#brandon_grotesquebold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'brandon_grotesqueblack_italic';
+    src: url('/Fonts/brandon_blk_it-webfont.eot');
+    src: url('/Fonts/brandon_blk_it-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_blk_it-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_blk_it-webfont.woff') format('woff'),
+         url('/Fonts/brandon_blk_it-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_blk_it-webfont.svg#brandon_grotesqueblack_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'brandon_grotesqueblack';
+    src: url('/Fonts/brandon_blk-webfont.eot');
+    src: url('/Fonts/brandon_blk-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_blk-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_blk-webfont.woff') format('woff'),
+         url('/Fonts/brandon_blk-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_blk-webfont.svg#brandon_grotesqueblack') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'brandon_grotesquelight_italic';
+    src: url('/Fonts/brandon_light_it-webfont.eot');
+    src: url('/Fonts/brandon_light_it-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_light_it-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_light_it-webfont.woff') format('woff'),
+         url('/Fonts/brandon_light_it-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_light_it-webfont.svg#brandon_grotesquelight_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'brandon_grotesquelight';
+    src: url('/Fonts/brandon_light-webfont.eot');
+    src: url('/Fonts/brandon_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_light-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_light-webfont.woff') format('woff'),
+         url('/Fonts/brandon_light-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_light-webfont.svg#brandon_grotesquelight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'brandon_grotesqueMdIt';
+    src: url('/Fonts/brandon_med_it-webfont.eot');
+    src: url('/Fonts/brandon_med_it-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_med_it-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_med_it-webfont.woff') format('woff'),
+         url('/Fonts/brandon_med_it-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_med_it-webfont.svg#brandon_grotesqueMdIt') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'brandon_grotesquemedium';
+    src: url('/Fonts/brandon_med-webfont.eot');
+    src: url('/Fonts/brandon_med-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_med-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_med-webfont.woff') format('woff'),
+         url('/Fonts/brandon_med-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_med-webfont.svg#brandon_grotesquemedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'brandon_grotesqueRgIt';
+    src: url('/Fonts/brandon_reg_it-webfont.eot');
+    src: url('/Fonts/brandon_reg_it-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_reg_it-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_reg_it-webfont.woff') format('woff'),
+         url('/Fonts/brandon_reg_it-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_reg_it-webfont.svg#brandon_grotesqueRgIt') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'brandon_grotesque_regularRg';
+    src: url('/Fonts/brandon_reg-webfont.eot');
+    src: url('/Fonts/brandon_reg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_reg-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_reg-webfont.woff') format('woff'),
+         url('/Fonts/brandon_reg-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_reg-webfont.svg#brandon_grotesque_regularRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'brandon_grotesquethin_italic';
+    src: url('/Fonts/brandon_thin_it-webfont.eot');
+    src: url('/Fonts/brandon_thin_it-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_thin_it-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_thin_it-webfont.woff') format('woff'),
+         url('/Fonts/brandon_thin_it-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_thin_it-webfont.svg#brandon_grotesquethin_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'brandon_grotesquethin';
+    src: url('/Fonts/brandon_thin-webfont.eot');
+    src: url('/Fonts/brandon_thin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Fonts/brandon_thin-webfont.woff2') format('woff2'),
+         url('/Fonts/brandon_thin-webfont.woff') format('woff'),
+         url('/Fonts/brandon_thin-webfont.ttf') format('truetype'),
+         url('/Fonts/brandon_thin-webfont.svg#brandon_grotesquethin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.modal-button
+{
+    margin:0 auto;
+    margin:10px 0 0 0;
+}
+
+.modal-title
+{
+    padding:0 0 10px 0;
+    margin:0;
+    font-size:24px;
+    line-height:30px;
+    font-family:'brandon_grotesquemedium',Arial;
+}
+
+.title
+{
+    padding:0 0 10px 0;
+    margin:32px 35px 10px 35px;
+    font-size:32px;
+    line-height:32px;
+    border-bottom:1px solid #c8c8c8;
+    font-family:'brandon_grotesquemedium',Arial;
+}
+
+.copy
+{
+    margin:0;
+    padding:15px 35px 10px 35px;
+    font-size:24px;
+    line-height:32px;
+    font-family:'brandon_grotesque_regularRg',Arial;
+}
+
+.link
+{
+    color:#4d7853;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.footer
+{
+    font-size:14px;
+    line-height:20px;
+    padding:0;
+    margin:0;
+    font-family:'brandon_grotesque_regularRg',Arial;
+}
+
+.offer-title
+{
+    font-family:'brandon_grotesque_regularRg',Arial;
+    font-size:23px;
+    padding:0;
+    margin:0;
+}
+
+.offer-description
+{
+    font-family:'brandon_grotesque_regularRg',Arial;
+    font-size:19px;
+    line-height:26px;
+    padding:0;
+    margin:0 0 0 30px;
+}
+
+.element-title
+{
+    font-family:'brandon_grotesque_regularRg',Arial;
+    font-size:24px;
+    padding:0;
+    margin:0 0 0 0;
+}
+
+.element-input
+{
+    width:96%;
+    border:1px solid #c8c8c8;
+    background:#FFF;
+    font-family:'brandon_grotesque_regularRg',Arial;
+    font-size:19px;
+    padding:6px; 
+    border-radius:0;
+}
+
+.selectbox
+{
+    height:40px;
+    border:0;
+    outline: 1px solid #CCC;
+}
+
+.error
+{
+    color:#FF0000;
+}
+
+.error-message
+{
+    color:#FF0000;
+    margin:5px 0 0 0;
+    font-family:'brandon_grotesque_regularRg',Arial;
+    font-size:14px;
+}
+
+.required-field-label
+{
+    padding:30px 0 0 0;
+    font-size:21px;
+}
+
+.question-frame
+{
+    width:95%;
+    float:left;
+}
+
+.question-box
+{
+    clear:none;
+    width:50%;
+}
+
+.questionaire-block
+{
+    margin:0 0 10px 0;
+    overflow:hidden;
+}
+
+.questionaire-block input[type="radio"] {
+    border-radius:50%;
+    height:17px;
+    width:17px;
+    margin:8px 10px 0 10px;
+    display:inline-block;
+    vertical-align: baseline;
+    border:0;
+    background:#FFF;
+    opacity:0.5;
+}
+
+.questionaire-title
+{
+    padding:10px 0;
+    margin:0;
+    font-family:'brandon_grotesque_regularRg',Arial;
+    font-size:24px;
+    color:#FFFFFF;
+}
+
+.questionaire-block label {
+    display:inline-block;
+    padding:4px 0px;
+    font-family:brandon_grotesque_regularRg;
+    font-size:24px;
+    color:#FFF;
+}
+
+.question-input
+{
+    width:200px;
+    border:0;
+    background:#FFF;
+    opacity:0.3;
+    font-family:'brandon_grotesque_regularRg',Arial;
+    font-size:20px;
+    padding:4px;
+    margin:0 0 0 5px;
+    color:#000; 
+}
+
+#validation
+{
+    border:1px solid #bdbdbd;
+    padding:10px;
+    box-sizing:border-box;
+    background:#F9F9F9;
+    outline: none !important;
+}
+
+#validation input[type="checkbox"]
+{
+    float:left;
+    margin-left:-30px;
+    width:20px;
+    height:20px;
+}
+
+#validation label {
+    display:inline-block;
+    padding:4px 0px;
+    font-family:brandon_grotesque_regularRg;
+    font-size:16px;
+    margin-left:30px;
+    line-height:20px;
+    color:#FF0000;
+}
+
+#additional-copy
+{
+    border-top:1px solid #538356;
+    margin:10px 140px 0 10px;
+    padding:30px 0 0 0;
+}
+
+#additional-copy input[type="checkbox"]
+{
+    float:left;
+    margin-left:-30px;
+    width:20px;
+    height:20px;
+}
+
+#additional-copy label
+{
+    font-family:'brandon_grotesque_regularRg',Arial;
+    font-size:24px;
+    color:#FFF;
+    display:block;
+    margin-left:30px;
+    line-height:26px;
+}
+
+
+#additional-links
+{
+    padding:0;
+    margin:30px 0 0 30px;
+}
+
+#additional-links a
+{
+    font-family:'brandon_grotesque_regularRg',Arial;
+    font-size:24px;
+    color:#FFF;
+    text-decoration:none;
+    float:left;
+}
+
+.separator
+{
+    color:#538356;
+    font-family:'brandon_grotesque_regularRg',Arial;
+    font-size:24px;
+    display:block;
+    margin:0 20px;
+    float:left;
+}
+
+.short
+{
+    width:22%;
+}
+
+.inactive
+{
+    color:#c8c8c8!important;
+}
+
+.hide
+{
+    display:none;
+}
+
+#birthyear
+{
+    width:367px;
+}
+
+
+
+/* Media Query */
+@media only screen and (min-width : 320px) and (max-width : 667px) 
+{
+
+    #wrapper
+    {
+        width:100%;
+        background-size:cover;
+        padding-top:0;
+        background:none;
+    }
+
+    #background-header
+    {
+        background-size:cover;
+        height:200px;
+    }
+
+    #main
+    {
+        width: 100%;
+        margin:0;
+    }
+
+    #common-frame
+    {
+        width: 100%;
+        min-width:320px;
+        margin:0 auto;
+        margin-top:-80px;
+        overflow:hidden;
+    }
+
+    #common-frame-copy
+    {
+        width:100%;
+    }
+
+    #common-frame-products
+    {
+        width:100%;
+        margin:0;
+        padding:0 0 0 29px;
+        height:420px;
+    }
+
+    #product-1  
+    {
+        margin:0 auto;
+        width:85%;
+    }
+
+    #submit-frame
+    {
+        width:100%;
+        padding:20px 0 0 0;
+        text-align:center;
+    }
+
+    #state
+    {
+        width:100%;
+    }
+
+    #zip
+    {
+        width:100%;
+    }
+
+    #coupon-frame
+    {
+        padding:0 15px;
+    }
+
+    .title
+    {
+        font-size:28px;
+        margin:32px 30px 10px 30px;
+    }
+
+    .question-box
+    {
+        clear:left;
+        width:100%;
+    }
+
+    .copy
+    {
+        font-size:20px;
+        padding:15px 30px 10px 30px;
+        line-height:28px;
+    }
+
+    .offer
+    {
+        width:88%;
+        margin-left:-25px;
+    }
+  
+    .offer-title
+    {
+        font-size:22px;
+    }
+
+    .element
+    {
+        width:78%;
+    }
+
+    .short
+    {
+        width:52%;
+    }
+
+    #offer-form-questionaire
+    {
+        padding:0px 10px 20px 10px;
+    }
+
+    #offer-form-questionaire-content
+    {
+        padding:5px 5px 40px 5px;
+    }
+
+    .questionaire-title
+    {
+        font-size:20px;
+        line-height:22px;
+    }
+
+    .questionaire-block label 
+    {
+        font-size:18px;
+        padding:0;
+    }
+
+    .questionaire-block input[type="radio"] 
+    {
+        margin:0px 10px 0 15px;
+    }
+
+    .question-frame
+    {
+        width:85%;
+        float:left;
+    }
+
+    .question-input
+    {
+        width:100px;
+        font-size:14px;
+        padding:2px;
+    }
+    
+    #additional-copy
+    {
+        margin:10px 18px 0 10px;
+        padding-top:20px;
+    }
+
+    #additional-copy input[type="checkbox"]
+    {
+        float:left;
+        margin-left:-30px;
+        width:20px;
+        height:20px;
+        background:#FFF;
+    }
+
+    #additional-copy label
+    {
+        font-size:16px;
+        margin-left:30px;
+        line-height:20px;
+    }
+
+
+    #additional-links
+    {
+        padding:0;
+        margin:10px 0 0 30px;
+    }
+
+    #additional-links a
+    {
+        font-size:14px;
+    }
+
+    .separator
+    {
+        font-size:14px;
+    }
+
+    .reveal-modal
+    {
+        width:250px;
+		margin-left: -165px;
+    }
+
+    #footer
+    {
+        padding:40px 35px;
+    }
+
+    #birthyear
+    {
+        width:100%;
+    }
+
+}

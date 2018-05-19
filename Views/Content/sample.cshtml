@@ -1,0 +1,513 @@
+﻿@model IList<GMCOffer.Models.Offer>
+<!--
+Start of DoubleClick Floodlight Tag: Please do not remove
+Activity name of this tag: 2016 GMC CCG Get Your Free Sample Question Page
+URL of the webpage where the tag is expected to be placed: http://www.GreenMountainCoffee.com/ccg_sampleform
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 02/10/2016
+-->
+<script type="text/javascript" id="DoubleClickFloodlightTag3129198">
+    //<![CDATA[
+    var axel = Math.random() + "";
+    var a = axel * 10000000000000;
+    var newIFrame=document.createElement('iframe');
+    newIFrame.src='https://5094990.fls.doubleclick.net/activityi;src=5094990;type=2016g0;cat=2016g006;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=' + a + '?';
+    newIFrame.width="1";
+    newIFrame.frameBorder="0";
+    newIFrame.height="1";
+    var scriptNode=document.getElementById('DoubleClickFloodlightTag3129198');
+    scriptNode.parentNode.insertBefore(newIFrame,scriptNode);
+    //]]>
+</script>
+<noscript>
+<iframe src="https://5094990.fls.doubleclick.net/activityi;src=5094990;type=2016g0;cat=2016g006;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+</noscript>
+<!-- End of DoubleClick Floodlight Tag: Please do not remove -->
+
+<script>
+    $(function () {     
+        //check cookie value
+        var ckeligibility = Cookies.get('ck-eligibility');
+        if (ckeligibility == "true") {
+            //location.href = "/eligibility";
+        }
+
+        //fire IBM tag
+        FireIBMPageViewTag('CCG_Form', 'CCG', 'Mobile:CCG_Form', 'CCG_M');
+
+        if (CheckIfMobile() == false) {            
+            $('#footer').css('padding', '40px 125px');
+        }
+    });
+    
+    function setAddress() {
+        var selectedaddress = $('#streetaddressmm').val();
+        var selectedaddressArray = selectedaddress.split("|");
+
+        //set the address information in the correct boxes
+        $('#streetaddress1').val(selectedaddressArray[0]);
+        $('#streetaddress2').val('');
+        $('#city').val(selectedaddressArray[1]);
+        $('#state').val(selectedaddressArray[2]);
+        $('#zip').val(selectedaddressArray[3]);
+
+        $('#multipleMatchModal').trigger('reveal:close');
+
+        //submit form
+        $('#frmSample').submit();
+    }
+
+    function addressValidationSubmission(address1, address2, city, state, zip) {
+        //check for override
+        var overrideValidationChecked = $('#overrideValidation').prop('checked');
+        if (overrideValidationChecked == false) {
+            //hide validation message if shown
+            $('#validation').hide();
+
+            var webMethod = "@GMCOffer.Common.Utilities.GetAddressValidationEndpoint()";
+            var parameters = "{'MailingStreetAddress1':'" + address1 + "','MailingStreetAddress2':'" + address2 + "', 'MailingCity':'" + city + "', 'MailingState':'" + state + "', 'MailingPostalCode':'" + zip + "'}";
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    var data = msg.d;
+
+                    var errors = data.Errors;
+                    if (errors != null) {
+                        //check for each errors and check the multiple match key
+                        for (var key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                var obj = errors[key];
+                                if (obj.Code == "F12") {
+                                    //multiple match: Go through Additional objects and populate drop down list
+                                    $.each(obj.Additional, function () {
+                                        $("#streetaddressmm").append($("<option />").val(this.Address1 + '|' + this.City + '|' + this.State + '|' + this.Zip).text(this.Address1 + ', ' + this.City + ', ' + this.State + ' ' + this.Zip));
+                                    });
+
+                                    //fire off modal window to request selection
+                                    $('#multipleMatchModal').reveal({
+                                        animation: 'fadeAndPop',                   //fade, fadeAndPop, none
+                                        animationspeed: 300,                       //how fast animtions are
+                                        closeonbackgroundclick: false,              //if you click background will modal close?
+                                        dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
+                                    });
+
+                                    break;
+                                }
+                                if (obj.Code == "S23") {
+                                    $('#validation').show();
+                                    $("#validation").attr("tabindex", -1).focus();
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        var mailingAddress = data.MailingAddress;
+                        if (mailingAddress != null) {
+                            //Correct Address
+                            $('#streetaddress1').val(mailingAddress.Address1);
+                            $('#streetaddress2').val(mailingAddress.Address2);
+                            $('#city').val(mailingAddress.City);
+                            $('#state').val(mailingAddress.State);
+                            $('#zip').val(mailingAddress.Zip);
+
+                            //hide error message
+                            $('#validation').hide();
+
+                            //fire IBM Tag
+                            var selectedSample = $("input[name='variants']:checked").attr('data-label');
+                            FireIBMCreateElementTag('Submit', 'CCG_Form', 'CCG_Form_' + selectedSample, 'Submit', 'Mobile:CCG_Form', 'Mobile:CCG_Form_' + selectedSample);
+
+                            //submit form
+                            $('#frmSample').submit();
+                        }
+                        else {
+                            $('#validation').show();
+                            $("#validation").attr("tabindex", -1).focus();
+                        }
+                    }
+                },
+                error: function (e) {
+                    $('#validation').show();
+                    $("#validation").attr("tabindex", -1).focus();
+                }
+            });
+        }
+        else {
+            //submit form
+            $('#frmSample').submit();
+        }
+    }
+
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    function validateForm() {
+        var isOk = true;
+        $('.error-message').remove();
+        var errorcount = 0;
+
+        //check to ensure each field is filled
+        $('.required').each(function (index) {
+            var val = $(this).val();
+            if (val == "") {
+                var dataerror = $(this).attr('data-error');
+                $('<div class="error-message">' + dataerror + '</div>').insertAfter(this);
+                $(this).addClass('error-bg');
+                isOk = false;
+                errorcount++;
+                if (errorcount == 1) {
+                    $(this).focus();
+                }
+            }
+            else {
+                $(this).removeClass('error-bg');
+                $(this).next('div').remove();
+            }
+        });
+        //check to ensure that email addresses are the same
+        var email = $('#emailaddress').val();
+        var emailconfirmation = $('#emailconfirmation').val();
+
+        //validate email address first
+        if (validateEmail(email) == false) {
+            $('<div class="error-message">Email addresses is invalid.</div>').insertAfter($('#emailaddress'));
+            isOk = false;
+        }
+
+        if (email != emailconfirmation) {
+            $('<div class="error-message">Email addresses entered must match.</div>').insertAfter($('#emailaddress'));
+            isOk = false;
+        }
+
+    
+        //check if sample is selected
+        if (!$("input[name='variants']:checked").val()) {
+            $('<span class="error-message"> Required</span>').insertAfter($('#sample-label-error'));
+            isOk = false;
+        }
+
+        //check question 1 
+        if (!$("input[name='question-1']:checked").val()) {
+            $('<span class="error-message"> Required</span>').insertAfter($('#question-1-label-error'));
+            isOk = false;
+        }
+        //check question 2
+        if (!$("input[name='question-2']:checked").val()) {
+            $('<span class="error-message"> Required</span>').insertAfter($('#question-2-label-error'));
+            isOk = false;
+        }
+        //check question 3
+        if (!$("input[name='question-3']:checked").val()) {
+            $('<span class="error-message"> Required</span>').insertAfter($('#question-3-label-error'));
+            isOk = false;
+        }
+
+        //check question 2 other: if selected ensure box is filled out
+        if ($("input[name='question-2']:checked").val() == 'Other') {
+            if ($('#question-2-6-other').val() == '') {
+                $('<span class="error-message"> Required</span>').insertAfter($('#question-2-6-other'));
+                isOk = false;
+            }
+        }
+
+
+        //check question 3 other: if selected ensure box is filled out
+        if ($("input[name='question-3']:checked").val() == 'Other') {
+            if ($('#question-3-10-other').val() == '') {
+                $('<span class="error-message"> Required</span>').insertAfter($('#question-3-10-other'));
+                isOk = false;
+            }
+        }
+
+        if (isOk) {
+            //lets validate the address and submit the form
+            var isAddressOK = addressValidationSubmission($('#streetaddress1').val(), $('#streetaddress2').val(), $('#city').val(), $('#state').val(), $('#zip').val());
+        }
+
+        return false;
+    }
+</script>
+<form action="/get?source=@Request.QueryString["source"]" method="post" enctype="multipart/form-data" id="frmSample">
+<div id="common-frame">
+    <div id="common-frame-copy" class="left">
+        <p class="title">Get Your Free K-Cup<sup>&reg;</sup><br>Pod Sample</p>
+        <p class="copy">What if you could discover your new favorite cup of coffee for free?  Simply fill out the information below and your next cup is on us.</p>
+        <p class="copy">
+            Don't have access to a Keurig<sup>&reg;</sup><br />K-Cup<sup>&reg;</sup> Brewer?<br>Learn more on
+            <a href="http://www.keurig.com/content/brewers?cm_mmc=ref-_-ccg-_-kgm-_-brewers" class="link" onMouseDown="fireFloodlight('5094990', '2016g0', '2016g007');FireIBMCreateElementTag('OutboundLink:KeurigWebsite', 'CCG_Form', 'CCG_Form', 'OutboundLink:KeurigWebsite', 'Mobile:CCG_Form', 'Mobile:CCG_Form');">Keurig.com ></a></p>
+    </div>
+    @Html.Partial("_Common")
+    <p class="copy clear">Which K-Cup<sup>&reg;</sup> pod coffee sample would you like to receive? <span id="sample-label-error"></span></p>
+    <div id="offer-frame">
+        <!-- Offers -->
+        @foreach (GMCOffer.Models.Offer offer in Model)
+        {
+            var inactiveFlag = offer.boh <= 0 ? "inactive" : "";
+            var disabledFlag = offer.boh <= 0 ? "disabled" : "";
+            
+            <div class="offer @inactiveFlag">
+                <input type="radio" id="variant-@offer.ccgsku" value="@offer.ccgsku" data-label="@offer.title" name="variants" class="variant" @disabledFlag />
+                <p class="offer-title left"><label for="variant-@offer.ccgsku">@Html.Raw(offer.title)</label></p>
+                <p class="offer-description clear">@Html.Raw(offer.description)</p>
+            </div>            
+        }
+    </div>
+
+    <div id="offer-form">
+
+        <div class="element">
+            <p class="element-title">First Name <span class="error">*</span></p>
+            <input type="text" class="element-input required" id="firstname" name="firstname" data-error="Please enter your first name." />
+        </div>
+        <div class="element">
+            <p class="element-title">Last Name <span class="error">*</span></p>
+            <input type="text" class="element-input required" id="lastname" name="lastname" data-error="Please enter your last name." />
+        </div>
+        <div class="element clear">
+            <p class="element-title">Street Address 1<span class="error">*</span></p>
+            <input type="text" class="element-input required" id="streetaddress1" name="streetaddress1" data-error="Please enter your address line 1." />
+        </div>
+        <div class="element">
+            <p class="element-title">Street Address 2 (optional)</p>
+            <input type="text" class="element-input" id="streetaddress2" name="streetaddress2" />
+        </div>
+        <div class="element clear">
+            <p class="element-title">City<span class="error">*</span></p>
+            <input type="text" class="element-input required" id="city" name="city" data-error="Please enter your city." />
+        </div>
+        <div class="element short">
+            <p class="element-title">State<span class="error">*</span></p>
+                <select class="element-input selectbox required" id="state" name="state" data-error="Please select your state.">
+	            <option selected="selected" value="">--</option>
+	            <option value="AL">AL</option>
+	            <option value="AK">AK</option>
+	            <option value="AZ">AZ</option>
+	            <option value="AR">AR</option>
+	            <option value="CA">CA</option>
+	            <option value="CO">CO</option>
+	            <option value="CT">CT</option>
+	            <option value="DE">DE</option>
+	            <option value="DC">DC</option>
+	            <option value="FL">FL</option>
+	            <option value="GA">GA</option>
+	            <option value="HI">HI</option>
+	            <option value="ID">ID</option>
+	            <option value="IL">IL</option>
+	            <option value="IN">IN</option>
+	            <option value="IA">IA</option>
+	            <option value="KS">KS</option>
+	            <option value="KY">KY</option>
+	            <option value="LA">LA</option>
+	            <option value="ME">ME</option>
+	            <option value="MD">MD</option>
+	            <option value="MA">MA</option>
+	            <option value="MI">MI</option>
+	            <option value="MN">MN</option>
+	            <option value="MS">MS</option>
+	            <option value="MO">MO</option>
+	            <option value="MT">MT</option>
+	            <option value="NE">NE</option>
+	            <option value="NV">NV</option>
+	            <option value="NH">NH</option>
+	            <option value="NJ">NJ</option>
+	            <option value="NM">NM</option>
+	            <option value="NY">NY</option>
+	            <option value="NC">NC</option>
+	            <option value="ND">ND</option>
+	            <option value="OH">OH</option>
+	            <option value="OK">OK</option>
+	            <option value="OR">OR</option>
+	            <option value="PA">PA</option>
+	            <option value="RI">RI</option>
+	            <option value="SC">SC</option>
+	            <option value="SD">SD</option>
+	            <option value="TN">TN</option>
+	            <option value="TX">TX</option>
+	            <option value="UT">UT</option>
+	            <option value="VT">VT</option>
+	            <option value="VA">VA</option>
+	            <option value="WA">WA</option>
+	            <option value="WV">WV</option>
+	            <option value="WI">WI</option>
+	            <option value="WY">WY</option>
+            </select>
+        </div>
+        <div class="element short">
+            <p class="element-title">Zip Code<span class="error">*</span></p>
+            <input type="text" class="element-input required" id="zip" name="zip" data-error="Please enter your zip code."/>
+        </div>
+        <div class="element clear">
+            <p class="element-title">Email Address<span class="error">*</span></p>
+            <input type="text" class="element-input required" id="emailaddress" name="emailaddress" data-error="Please enter your email address."/>
+        </div>
+        <div class="element">
+            <p class="element-title">Email Confirmation<span class="error">*</span></p>
+            <input type="text" class="element-input required" id="emailconfirmation" name="emailconfirmation" data-error="Please enter your email confirmation." />
+        </div>
+        <div class="element clear">
+            <p class="element-title">Birth Year<span class="error">*</span></p>
+            <select class="element-input selectbox required" id="birthdayyear" name="birthdayyear" data-error="Please select your birth year.">
+                <option value="">--</option>
+                @for (var counter = DateTime.Now.Year; counter >= 1900; counter--) { 
+                    <option value="@counter">@counter</option>
+                }
+            </select>
+        </div>
+        <div class="element">
+            <p class="element-title required-field-label align-center">Required Fields<span class="error">*</span></p>
+        </div>
+        <div id="validation" class="element clear hide" style="width:95%;">            
+            <label for="overrideValidation">                
+                <input type="checkbox" id="overrideValidation" name="overrideValidation" />
+                Address cannot be verified against the USPS Postal database.  Please click on the checkbox if the address you entered is indeed yours.</label>
+        </div>
+    </div>
+</div>
+<div id="offer-form-questionaire">
+    <div id="offer-form-questionaire-content">
+        <div class="questionaire-block clear">
+            <p class="questionaire-title">1.  How often do you currently drink Green Mountain Coffee<sup>&reg;</sup>?<span class="error" id="question-1-label-error">*</span></p>
+            <div class="left question-box">
+                <div class="question-frame clear">
+                    <input type="radio" id="question-1-1" name="question-1" value="Daily">
+                    <label for="question-1-1">Daily</label>
+                </div>
+                <div class="question-frame clear">            
+                    <input type="radio" id="question-1-3" name="question-1" value="2-3 times/week">
+                    <label for="question-1-3">2-3 times/week</label>
+                </div>
+                <div class="question-frame clear">             
+                    <input type="radio" id="question-1-5" name="question-1" value="Weekly">
+                    <label for="question-1-5">Weekly</label>
+                </div>
+            </div>
+            <div class="left question-box">
+                <div class="question-frame clear">
+                    <input type="radio" id="question-1-2" name="question-1" value="Monthly">
+                    <label for="question-1-2">Monthly</label>
+                </div>
+                <div class="question-frame clear">            
+                    <input type="radio" id="question-1-4" name="question-1" value="Never tried">
+                    <label for="question-1-4">Never tried</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="questionaire-block clear">
+            <p class="questionaire-title">2.  How did you learn about this sampling program?<span class="error" id="question-2-label-error">*</span></p>
+            <div class="left question-box">
+                <div class="question-frame clear">
+                    <input type="radio" id="question-2-1" name="question-2" value="TV/Digital ad">
+                    <label for="question-2-1">TV/Digital ad</label>
+                </div>
+                <div class="question-frame clear">            
+                    <input type="radio" id="question-2-3" name="question-2" value="Digital banner">
+                    <label for="question-2-3">Digital banner</label>
+                </div>
+                <div class="question-frame clear">             
+                    <input type="radio" id="question-2-5" name="question-2" value="Social Media">
+                    <label for="question-2-5">Social Media</label>
+                </div>
+            </div>
+            <div class="left question-box">
+                <div class="question-frame clear">
+                    <input type="radio" id="question-2-2" name="question-2" value="Mobile">
+                    <label for="question-2-2">Mobile</label>
+                </div>
+                <div class="question-frame clear">            
+                    <input type="radio" id="question-2-4" name="question-2" value="Word-of-mouth">
+                    <label for="question-2-4">Word-of-mouth</label>
+                </div>
+                <div class="question-frame clear">             
+                    <input type="radio" id="question-2-6" name="question-2" value="Other">
+                    <label for="question-2-6">Other</label>
+                    <input type="text" class="question-input" id="question-2-6-other" name="question-2-6-other" />
+                </div>
+            </div>
+        </div>
+
+        <div class="questionaire-block clear">
+            <p class="questionaire-title" id="question-3-label">3.  What is your favorite coffee brand?<span class="error" id="question-3-label-error">*</span></p>
+            <div class="left question-box">
+                <div class="question-frame clear">
+                    <input type="radio" id="question-3-1" name="question-3" value="Green Mountain Coffee">
+                    <label for="question-3-1">Green Mountain Coffee<sup>&reg;</sup></label>
+                </div>
+                <div class="question-frame clear">            
+                    <input type="radio" id="question-3-3" name="question-3" value="Starbucks">
+                    <label for="question-3-3">Starbucks<sup>&reg;</sup></label>
+                </div>
+                <div class="question-frame clear">             
+                    <input type="radio" id="question-3-5" name="question-3" value="Maxwell House">
+                    <label for="question-3-5">Maxwell House</label>
+                </div>
+                <div class="question-frame clear">             
+                    <input type="radio" id="question-3-7" name="question-3" value="Folgers">
+                    <label for="question-3-7">Folgers<sup>&reg;</sup></label>
+                </div>
+                <div class="question-fram clear">             
+                    <input type="radio" id="question-3-9" name="question-3" value="Donut Shop">
+                    <label for="question-3-9">The Original Donut Shop<sup>&reg;</sup></label>
+                </div>
+                <div class="question-frame clear">             
+                    <input type="radio" id="question-3-11" name="question-3" value="Donut Shop">
+                    <label for="question-3-11">Dunkin' Donuts<sup>&reg;</sup></label>
+                </div>
+            </div>
+            <div class="left question-box">
+                <div class="question-frame clear">
+                    <input type="radio" id="question-3-2" name="question-3" value="Eight O'Clock">
+                    <label for="question-3-2">Eight O'Clock<sup>&reg;</sup></label>
+                </div>
+                <div class="question-frame clear">            
+                    <input type="radio" id="question-3-4" name="question-3" value="Newman's Own Organics">
+                    <label for="question-3-4">Newman's Own<sup>&reg;</sup> Organics</label>
+                </div>
+                <div class="question-frame clear">             
+                    <input type="radio" id="question-3-6" name="question-3" value="Caribou">
+                    <label for="question-3-6">Caribou Cofffee<sup>&reg;</sup></label>
+                </div>
+                <div class="question-frame clear">             
+                    <input type="radio" id="question-3-8" name="question-3" value="Tully's">
+                    <label for="question-3-8">Tully's<sup>&reg;</sup></label>
+                </div>
+                <div class="question-frame clear">             
+                    <input type="radio" id="question-3-10" name="question-3" value="Other">
+                    <label for="question-3-10">Other</label>
+                    <input type="text" class="question-input" id="question-3-10-other" name="question-3-10-other" />
+                </div>
+            </div>
+        </div>
+        <div id="additional-copy" class="clear">
+            <label for="optin">
+                <input type="checkbox" name="optin1" id="optin1" checked="checked" />
+                I want to receive emails about Green Mountain Coffee<sup>&reg;</sup> and other products, as well as special deals from Keurig.com.</label>
+
+            <p id="additional-links">
+                <a href="http://www.keuriggreenmountain.com/TermsofUse?cm_mmc=ref-_-ccg-_-kgm-_-terms" target="_blank">Terms of Use</a>
+                <span class="separator">|</span>
+                <a href="http://www.keuriggreenmountain.com/PrivacyPolicy?cm_mmc=ref-_-ccg-_-kgm-_-privacy" target="_blank">Privacy</a>
+
+            </p>
+        </div>
+
+    </div>
+</div>
+<div id="submit-frame">
+    <input type="submit" class="button" value="Submit   " onclick="return validateForm();" />
+    <input type="button" class="button-alt" value="Cancel" onclick="FireIBMCreateElementTag('Cancel', 'CCG_Form', 'CCG_Form', 'Cancel', 'Mobile:CCG_Form', 'Mobile:CCG_Form'); location.href='@System.Configuration.ConfigurationManager.AppSettings["CloseButtonURL"]';" />
+</div>
+</form>

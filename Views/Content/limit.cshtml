@@ -1,0 +1,14 @@
+﻿<script>
+    $(function () {
+        FireIBMCreateElementTag('One per household', 'CCGFormError', 'CCG_Form', 'One per household', 'Mobile:CCGFormError', 'Mobile:CCG_Form');
+    });
+</script>
+<div id="common-frame">
+    <div id="common-frame-copy" class="left">
+        <p class="title">Really like our coffee, huh?</p>
+        <p class="copy">We're sorry, but it seems that you or someone in your household has already requested this free sample.</p>
+        <p class="copy">Please <a href="mailto:greenmountaincoffee@keurig.com" class="link" onclick="FireIBMCreateElementTag('Contact Us', 'CCGFormError', 'CCG_Form', 'Contact Us', 'Mobile:CCGFormError', 'Mobile:CCG_Form');">contact us</a> if you believe this is a mistake.</p>
+        <p class="copy" style="padding-right:0px;">Return to <a href="@System.Configuration.ConfigurationManager.AppSettings["ReturnLinkURL"]" class="link" onclick="FireIBMCreateElementTag('OutboundLink:GMCWebsite', 'CCG_Form', 'CCG_Form', 'OutboundLink:GMCWebsite', 'Mobile:CCG_Form', 'Mobile:CCG_Form');">GreenMountainCoffee.com ></a></p>
+    </div>
+    @Html.Partial("_Common")
+</div>

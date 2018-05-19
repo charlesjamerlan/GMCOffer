@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://samplemetrics-api.safeprocessing.com/pii" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://samplemetrics-api.safeprocessing.com/pii" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://samplemetrics-api.safeprocessing.com/pii">
+      <s:element name="GetShippingStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InventoryID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderNumber" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShippingStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShippingStatusResult" type="tns:ShippingStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ShippingStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TrackingNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfWebServiceError" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfWebServiceError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Error" nillable="true" type="tns:WebServiceError" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WebServiceError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Additional" type="tns:ArrayOfAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Address" nillable="true" type="tns:Address" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Address">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCurrentInventory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InventoryID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentInventoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetCurrentInventoryResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentSKUInventory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InventoryID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sku" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentSKUInventoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrentSKUInventoryResult" type="tns:ArrayOfSampleSKU" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSampleSKU">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SampleSKU" nillable="true" type="tns:SampleSKU" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SampleSKU">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SKU" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SampleDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BalanceOnHand" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddressValidation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MailingStreetAddress1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingStreetAddress2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingState" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingPostalCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddressValidationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddressValidationResult" type="tns:AddressResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AddressResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="MailingAddress" type="tns:Address" />
+          <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfWebServiceError" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Submit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InventoryID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccessKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TrafficSource" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RegistrationSource" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingStreetAddress1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingStreetAddress2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingState" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingPostalCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MailingCountry" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Gender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Birthdate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CCGSKU" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Opt1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Opt2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Opt3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Opt4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional5" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional6" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional7" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional8" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional9" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional10" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional11" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional12" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional13" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional14" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional15" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional16" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional17" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional18" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional19" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional20" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional21" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional22" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional23" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional24" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Additional25" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserAgent" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IsRequiredBirthDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IsRequiredEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IsRequiredAddressValidation" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitResult" type="tns:Results" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Results">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Successful" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfWebServiceError" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ShippingStatus" nillable="true" type="tns:ShippingStatus" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfSampleSKU" nillable="true" type="tns:ArrayOfSampleSKU" />
+      <s:element name="AddressResult" nillable="true" type="tns:AddressResult" />
+      <s:element name="Results" nillable="true" type="tns:Results" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetShippingStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShippingStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetShippingStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShippingStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentInventorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetCurrentInventory" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentInventorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetCurrentInventoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentSKUInventorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetCurrentSKUInventory" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentSKUInventorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetCurrentSKUInventoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddressValidationSoapIn">
+    <wsdl:part name="parameters" element="tns:AddressValidation" />
+  </wsdl:message>
+  <wsdl:message name="AddressValidationSoapOut">
+    <wsdl:part name="parameters" element="tns:AddressValidationResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitSoapIn">
+    <wsdl:part name="parameters" element="tns:Submit" />
+  </wsdl:message>
+  <wsdl:message name="SubmitSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShippingStatusHttpGetIn">
+    <wsdl:part name="InventoryID" type="s:string" />
+    <wsdl:part name="OrderNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetShippingStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:ShippingStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentInventoryHttpGetIn">
+    <wsdl:part name="InventoryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentInventoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentSKUInventoryHttpGetIn">
+    <wsdl:part name="InventoryID" type="s:string" />
+    <wsdl:part name="Sku" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentSKUInventoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSampleSKU" />
+  </wsdl:message>
+  <wsdl:message name="AddressValidationHttpGetIn">
+    <wsdl:part name="MailingStreetAddress1" type="s:string" />
+    <wsdl:part name="MailingStreetAddress2" type="s:string" />
+    <wsdl:part name="MailingCity" type="s:string" />
+    <wsdl:part name="MailingState" type="s:string" />
+    <wsdl:part name="MailingPostalCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddressValidationHttpGetOut">
+    <wsdl:part name="Body" element="tns:AddressResult" />
+  </wsdl:message>
+  <wsdl:message name="SubmitHttpGetIn">
+    <wsdl:part name="InventoryID" type="s:string" />
+    <wsdl:part name="Source" type="s:string" />
+    <wsdl:part name="AccessKey" type="s:string" />
+    <wsdl:part name="TrafficSource" type="s:string" />
+    <wsdl:part name="RegistrationSource" type="s:string" />
+    <wsdl:part name="FirstName" type="s:string" />
+    <wsdl:part name="LastName" type="s:string" />
+    <wsdl:part name="MailingStreetAddress1" type="s:string" />
+    <wsdl:part name="MailingStreetAddress2" type="s:string" />
+    <wsdl:part name="MailingCity" type="s:string" />
+    <wsdl:part name="MailingState" type="s:string" />
+    <wsdl:part name="MailingPostalCode" type="s:string" />
+    <wsdl:part name="MailingCountry" type="s:string" />
+    <wsdl:part name="EmailAddress" type="s:string" />
+    <wsdl:part name="Gender" type="s:string" />
+    <wsdl:part name="Birthdate" type="s:string" />
+    <wsdl:part name="CCGSKU" type="s:string" />
+    <wsdl:part name="Opt1" type="s:string" />
+    <wsdl:part name="Opt2" type="s:string" />
+    <wsdl:part name="Opt3" type="s:string" />
+    <wsdl:part name="Opt4" type="s:string" />
+    <wsdl:part name="Additional1" type="s:string" />
+    <wsdl:part name="Additional2" type="s:string" />
+    <wsdl:part name="Additional3" type="s:string" />
+    <wsdl:part name="Additional4" type="s:string" />
+    <wsdl:part name="Additional5" type="s:string" />
+    <wsdl:part name="Additional6" type="s:string" />
+    <wsdl:part name="Additional7" type="s:string" />
+    <wsdl:part name="Additional8" type="s:string" />
+    <wsdl:part name="Additional9" type="s:string" />
+    <wsdl:part name="Additional10" type="s:string" />
+    <wsdl:part name="Additional11" type="s:string" />
+    <wsdl:part name="Additional12" type="s:string" />
+    <wsdl:part name="Additional13" type="s:string" />
+    <wsdl:part name="Additional14" type="s:string" />
+    <wsdl:part name="Additional15" type="s:string" />
+    <wsdl:part name="Additional16" type="s:string" />
+    <wsdl:part name="Additional17" type="s:string" />
+    <wsdl:part name="Additional18" type="s:string" />
+    <wsdl:part name="Additional19" type="s:string" />
+    <wsdl:part name="Additional20" type="s:string" />
+    <wsdl:part name="Additional21" type="s:string" />
+    <wsdl:part name="Additional22" type="s:string" />
+    <wsdl:part name="Additional23" type="s:string" />
+    <wsdl:part name="Additional24" type="s:string" />
+    <wsdl:part name="Additional25" type="s:string" />
+    <wsdl:part name="UserAgent" type="s:string" />
+    <wsdl:part name="IsRequiredBirthDate" type="s:string" />
+    <wsdl:part name="IsRequiredEmail" type="s:string" />
+    <wsdl:part name="IsRequiredAddressValidation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitHttpGetOut">
+    <wsdl:part name="Body" element="tns:Results" />
+  </wsdl:message>
+  <wsdl:message name="GetShippingStatusHttpPostIn">
+    <wsdl:part name="InventoryID" type="s:string" />
+    <wsdl:part name="OrderNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetShippingStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:ShippingStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentInventoryHttpPostIn">
+    <wsdl:part name="InventoryID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentInventoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentSKUInventoryHttpPostIn">
+    <wsdl:part name="InventoryID" type="s:string" />
+    <wsdl:part name="Sku" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentSKUInventoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSampleSKU" />
+  </wsdl:message>
+  <wsdl:message name="AddressValidationHttpPostIn">
+    <wsdl:part name="MailingStreetAddress1" type="s:string" />
+    <wsdl:part name="MailingStreetAddress2" type="s:string" />
+    <wsdl:part name="MailingCity" type="s:string" />
+    <wsdl:part name="MailingState" type="s:string" />
+    <wsdl:part name="MailingPostalCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddressValidationHttpPostOut">
+    <wsdl:part name="Body" element="tns:AddressResult" />
+  </wsdl:message>
+  <wsdl:message name="SubmitHttpPostIn">
+    <wsdl:part name="InventoryID" type="s:string" />
+    <wsdl:part name="Source" type="s:string" />
+    <wsdl:part name="AccessKey" type="s:string" />
+    <wsdl:part name="TrafficSource" type="s:string" />
+    <wsdl:part name="RegistrationSource" type="s:string" />
+    <wsdl:part name="FirstName" type="s:string" />
+    <wsdl:part name="LastName" type="s:string" />
+    <wsdl:part name="MailingStreetAddress1" type="s:string" />
+    <wsdl:part name="MailingStreetAddress2" type="s:string" />
+    <wsdl:part name="MailingCity" type="s:string" />
+    <wsdl:part name="MailingState" type="s:string" />
+    <wsdl:part name="MailingPostalCode" type="s:string" />
+    <wsdl:part name="MailingCountry" type="s:string" />
+    <wsdl:part name="EmailAddress" type="s:string" />
+    <wsdl:part name="Gender" type="s:string" />
+    <wsdl:part name="Birthdate" type="s:string" />
+    <wsdl:part name="CCGSKU" type="s:string" />
+    <wsdl:part name="Opt1" type="s:string" />
+    <wsdl:part name="Opt2" type="s:string" />
+    <wsdl:part name="Opt3" type="s:string" />
+    <wsdl:part name="Opt4" type="s:string" />
+    <wsdl:part name="Additional1" type="s:string" />
+    <wsdl:part name="Additional2" type="s:string" />
+    <wsdl:part name="Additional3" type="s:string" />
+    <wsdl:part name="Additional4" type="s:string" />
+    <wsdl:part name="Additional5" type="s:string" />
+    <wsdl:part name="Additional6" type="s:string" />
+    <wsdl:part name="Additional7" type="s:string" />
+    <wsdl:part name="Additional8" type="s:string" />
+    <wsdl:part name="Additional9" type="s:string" />
+    <wsdl:part name="Additional10" type="s:string" />
+    <wsdl:part name="Additional11" type="s:string" />
+    <wsdl:part name="Additional12" type="s:string" />
+    <wsdl:part name="Additional13" type="s:string" />
+    <wsdl:part name="Additional14" type="s:string" />
+    <wsdl:part name="Additional15" type="s:string" />
+    <wsdl:part name="Additional16" type="s:string" />
+    <wsdl:part name="Additional17" type="s:string" />
+    <wsdl:part name="Additional18" type="s:string" />
+    <wsdl:part name="Additional19" type="s:string" />
+    <wsdl:part name="Additional20" type="s:string" />
+    <wsdl:part name="Additional21" type="s:string" />
+    <wsdl:part name="Additional22" type="s:string" />
+    <wsdl:part name="Additional23" type="s:string" />
+    <wsdl:part name="Additional24" type="s:string" />
+    <wsdl:part name="Additional25" type="s:string" />
+    <wsdl:part name="UserAgent" type="s:string" />
+    <wsdl:part name="IsRequiredBirthDate" type="s:string" />
+    <wsdl:part name="IsRequiredEmail" type="s:string" />
+    <wsdl:part name="IsRequiredAddressValidation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitHttpPostOut">
+    <wsdl:part name="Body" element="tns:Results" />
+  </wsdl:message>
+  <wsdl:portType name="piiSoap">
+    <wsdl:operation name="GetShippingStatus">
+      <wsdl:input message="tns:GetShippingStatusSoapIn" />
+      <wsdl:output message="tns:GetShippingStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentInventory">
+      <wsdl:input message="tns:GetCurrentInventorySoapIn" />
+      <wsdl:output message="tns:GetCurrentInventorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentSKUInventory">
+      <wsdl:input message="tns:GetCurrentSKUInventorySoapIn" />
+      <wsdl:output message="tns:GetCurrentSKUInventorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddressValidation">
+      <wsdl:input message="tns:AddressValidationSoapIn" />
+      <wsdl:output message="tns:AddressValidationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <wsdl:input message="tns:SubmitSoapIn" />
+      <wsdl:output message="tns:SubmitSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="piiHttpGet">
+    <wsdl:operation name="GetShippingStatus">
+      <wsdl:input message="tns:GetShippingStatusHttpGetIn" />
+      <wsdl:output message="tns:GetShippingStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentInventory">
+      <wsdl:input message="tns:GetCurrentInventoryHttpGetIn" />
+      <wsdl:output message="tns:GetCurrentInventoryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentSKUInventory">
+      <wsdl:input message="tns:GetCurrentSKUInventoryHttpGetIn" />
+      <wsdl:output message="tns:GetCurrentSKUInventoryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddressValidation">
+      <wsdl:input message="tns:AddressValidationHttpGetIn" />
+      <wsdl:output message="tns:AddressValidationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <wsdl:input message="tns:SubmitHttpGetIn" />
+      <wsdl:output message="tns:SubmitHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="piiHttpPost">
+    <wsdl:operation name="GetShippingStatus">
+      <wsdl:input message="tns:GetShippingStatusHttpPostIn" />
+      <wsdl:output message="tns:GetShippingStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentInventory">
+      <wsdl:input message="tns:GetCurrentInventoryHttpPostIn" />
+      <wsdl:output message="tns:GetCurrentInventoryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentSKUInventory">
+      <wsdl:input message="tns:GetCurrentSKUInventoryHttpPostIn" />
+      <wsdl:output message="tns:GetCurrentSKUInventoryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddressValidation">
+      <wsdl:input message="tns:AddressValidationHttpPostIn" />
+      <wsdl:output message="tns:AddressValidationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <wsdl:input message="tns:SubmitHttpPostIn" />
+      <wsdl:output message="tns:SubmitHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="piiSoap" type="tns:piiSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetShippingStatus">
+      <soap:operation soapAction="http://samplemetrics-api.safeprocessing.com/pii/GetShippingStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentInventory">
+      <soap:operation soapAction="http://samplemetrics-api.safeprocessing.com/pii/GetCurrentInventory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentSKUInventory">
+      <soap:operation soapAction="http://samplemetrics-api.safeprocessing.com/pii/GetCurrentSKUInventory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddressValidation">
+      <soap:operation soapAction="http://samplemetrics-api.safeprocessing.com/pii/AddressValidation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <soap:operation soapAction="http://samplemetrics-api.safeprocessing.com/pii/Submit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="piiSoap12" type="tns:piiSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetShippingStatus">
+      <soap12:operation soapAction="http://samplemetrics-api.safeprocessing.com/pii/GetShippingStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentInventory">
+      <soap12:operation soapAction="http://samplemetrics-api.safeprocessing.com/pii/GetCurrentInventory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentSKUInventory">
+      <soap12:operation soapAction="http://samplemetrics-api.safeprocessing.com/pii/GetCurrentSKUInventory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddressValidation">
+      <soap12:operation soapAction="http://samplemetrics-api.safeprocessing.com/pii/AddressValidation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <soap12:operation soapAction="http://samplemetrics-api.safeprocessing.com/pii/Submit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="piiHttpGet" type="tns:piiHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetShippingStatus">
+      <http:operation location="/GetShippingStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentInventory">
+      <http:operation location="/GetCurrentInventory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentSKUInventory">
+      <http:operation location="/GetCurrentSKUInventory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddressValidation">
+      <http:operation location="/AddressValidation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <http:operation location="/Submit" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="piiHttpPost" type="tns:piiHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetShippingStatus">
+      <http:operation location="/GetShippingStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentInventory">
+      <http:operation location="/GetCurrentInventory" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentSKUInventory">
+      <http:operation location="/GetCurrentSKUInventory" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddressValidation">
+      <http:operation location="/AddressValidation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <http:operation location="/Submit" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="pii">
+    <wsdl:port name="piiSoap" binding="tns:piiSoap">
+      <soap:address location="http://dev-samplemetrics-api.safeprocessing.com/pii.asmx" />
+    </wsdl:port>
+    <wsdl:port name="piiSoap12" binding="tns:piiSoap12">
+      <soap12:address location="http://dev-samplemetrics-api.safeprocessing.com/pii.asmx" />
+    </wsdl:port>
+    <wsdl:port name="piiHttpGet" binding="tns:piiHttpGet">
+      <http:address location="http://dev-samplemetrics-api.safeprocessing.com/pii.asmx" />
+    </wsdl:port>
+    <wsdl:port name="piiHttpPost" binding="tns:piiHttpPost">
+      <http:address location="http://dev-samplemetrics-api.safeprocessing.com/pii.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

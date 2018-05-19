@@ -1,0 +1,51 @@
+﻿<script type="text/javascript">
+    function runTracking() {
+        FireIBMCreateElementTag('OutboundLink:GMCVarietyPage', 'CCG_Form', 'CCG_Form', 'OutboundLink:GMCVarietyPage', 'Mobile:CCG_Form', 'Mobile:CCG_Form');
+        fireFloodlight('5094990', '2016g0', '2016g009');
+    }
+
+    function clickSeeVarieties() {
+        window.location.href = 'http://www.greenmountaincoffee.com/variety?cm_mmc=ref-_-gmc-_-sample-_-variety';
+    }
+
+    $(function () {
+        FireIBMPageViewTag('CCG_ThankYouPage', 'CCG', 'Mobile:CCG_ThankYouPage', 'CCG_M');
+        FireIBMCreateConversionEventTag('Try A Sample', '2', 'Sample Brewer', '100','Mobile:Try A Sample','2','Sample Brewer','100');
+    });
+</script>
+
+<!--
+Start of DoubleClick Floodlight Tag: Please do not remove
+Activity name of this tag: 2016 GMC CCG Thank you Samples are on the way confirmation page
+URL of the webpage where the tag is expected to be placed: http://www.GreenMountainCoffee.com/ccg_sampleformthankyou
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 02/10/2016
+-->
+<script type="text/javascript" id="DoubleClickFloodlightTag3129596">
+    //<![CDATA[
+    var axel = Math.random() + "";
+    var a = axel * 10000000000000;
+    var newIFrame=document.createElement('iframe');
+    newIFrame.src='https://5094990.fls.doubleclick.net/activityi;src=5094990;type=2016g0;cat=2016g008;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=' + a + '?';
+    newIFrame.width="1";
+    newIFrame.frameBorder="0";
+    newIFrame.height="1";
+    var scriptNode=document.getElementById('DoubleClickFloodlightTag3129596');
+    scriptNode.parentNode.insertBefore(newIFrame,scriptNode);
+    //]]>
+</script>
+<noscript>
+<iframe src="https://5094990.fls.doubleclick.net/activityi;src=5094990;type=2016g0;cat=2016g008;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+</noscript>
+<!-- End of DoubleClick Floodlight Tag: Please do not remove -->
+<div id="common-frame">
+    <div id="common-frame-copy" class="left">
+        <p class="title">Thank you!</p>
+        <p class="copy">Your samples are on the way. We’ll notify you by email if there is any change on the status of your order! Otherwise, please keep an eye out for your sample pack within 6-8 weeks.</p>
+    </div>
+    @Html.Partial("_Common")
+    <p class="copy clear">At Green Mountain Coffee<sup>&reg;</sup>, we believe the best cup of coffee is the one you enjoy the most.  Visit the Variety page to learn about the 50 choices we have to satisfy any mood or preference.</p>
+    <p class="copy">
+        <input type="button" class="button" value="See Varieties   " onmousedown="runTracking();" onclick="clickSeeVarieties();" />
+    </p>
+</div>

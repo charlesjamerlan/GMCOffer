@@ -1,0 +1,11 @@
+﻿<script>
+    Cookies.set('ck-eligibility', 'true');
+</script>
+<div id="common-frame">
+    <div id="common-frame-copy" class="left">
+        <p class="title">Sorry!</p>
+        <p class="copy">You must be at least @System.Configuration.ConfigurationManager.AppSettings["AgeLimit"] years old to get a free sample.</p>
+        <p class="copy">Return to <a href="@System.Configuration.ConfigurationManager.AppSettings["ReturnLinkURL"]" class="link" onclick="FireIBMCreateElementTag('OutboundLink:GMCWebsite', 'CCG_Form', 'CCG_Form', 'OutboundLink:GMCWebsite', 'Mobile:CCG_Form', 'Mobile:CCG_Form');">GreenMountainCoffee.com ></a></p>
+    </div>
+    @Html.Partial("_Common")
+</div>
